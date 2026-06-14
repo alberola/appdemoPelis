@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - main
+      - desarrollo
   pull_request:
     branches:
       - main
+      - desarrollo
+  workflow_dispatch:
 
 permissions:
   contents: read
