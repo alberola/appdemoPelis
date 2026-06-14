@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>App Demo Pelis</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="min-h-screen bg-black text-zinc-100 antialiased">
+	<header class="border-b border-zinc-900 bg-black/95">
+		<div class="mx-auto grid w-[min(1180px,calc(100%-32px))] gap-8 py-8 md:grid-cols-[1fr_minmax(320px,620px)] md:items-end md:py-10">
+			<div>
+				<p class="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">TMDB</p>
+				<h1 class="text-4xl font-semibold leading-none text-white md:text-6xl">Peliculas y series</h1>
+			</div>
+			<form id="search-form" class="grid gap-3 sm:grid-cols-[140px_1fr_auto]" autocomplete="off">
+				<select id="search-type" class="h-12 rounded-lg border border-zinc-800 bg-zinc-950 px-4 text-sm text-zinc-100 outline-none transition focus:border-zinc-500" aria-label="Tipo de busqueda">
+					<option value="multi">Todo</option>
+					<option value="movie">Peliculas</option>
+					<option value="tv">Series</option>
+				</select>
+				<input id="search-input" class="h-12 rounded-lg border border-zinc-800 bg-zinc-950 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-zinc-500" type="search" placeholder="Buscar por titulo..." aria-label="Titulo">
+				<button class="h-12 rounded-lg border border-white bg-white px-5 text-sm font-semibold text-black transition hover:bg-zinc-200" type="submit">Buscar</button>
+			</form>
+		</div>
+	</header>
+
+	<main class="mx-auto w-[min(1180px,calc(100%-32px))] py-8 md:py-10">
+		<section class="mb-10 flex flex-wrap gap-2" aria-label="Filtros de tendencias">
+			<button class="filter-button active h-10 rounded-lg px-4 text-sm font-medium transition" type="button" data-media-type="all">Tendencias</button>
+			<button class="filter-button h-10 rounded-lg px-4 text-sm font-medium transition" type="button" data-media-type="movie">Peliculas</button>
+			<button class="filter-button h-10 rounded-lg px-4 text-sm font-medium transition" type="button" data-media-type="tv">Series</button>
+		</section>
+
+		<section>
+			<div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+				<h2 id="results-title" class="text-2xl font-semibold text-white md:text-3xl">Tendencias de la semana</h2>
+				<p id="status" class="text-sm text-zinc-500" role="status" aria-live="polite"></p>
+			</div>
+			<div id="results" class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"></div>
+		</section>
+	</main>
+
+	<dialog id="detail-dialog" class="w-[min(900px,calc(100%-28px))] max-h-[86vh] overflow-auto rounded-lg border border-zinc-800 bg-zinc-950 p-0 text-zinc-100 shadow-2xl">
+		<button id="close-dialog" class="sticky left-[calc(100%-52px)] top-3 z-10 m-3 grid h-10 w-10 place-items-center rounded-full border border-zinc-800 bg-black text-sm font-semibold text-zinc-300 transition hover:border-zinc-600 hover:text-white" type="button" aria-label="Cerrar">x</button>
+		<div id="detail-content"></div>
+	</dialog>
+
+	<script src="/app.js"></script>
+</body>
+</html>
